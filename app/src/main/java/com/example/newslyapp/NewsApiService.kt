@@ -16,19 +16,19 @@ interface NewsInterface {
     fun getHeadLines(@Query("country")country: String, @Query("page")page : Int) : Call<NewsApiResponse>
 
     @GET("v2/top-headlines?apiKey=${API_KEY}")
-    fun getTechHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String) : Call<NewsApiResponse>
+    fun getTechHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String ="technology") : Call<NewsApiResponse>
 
     @GET("v2/top-headlines?apiKey=${API_KEY}")
-    fun getBusinessHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String) : Call<NewsApiResponse>
+    fun getBusinessHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String ="business") : Call<NewsApiResponse>
 
     @GET("v2/top-headlines?apiKey=${API_KEY}")
-    fun getEntertainmentHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String) : Call<NewsApiResponse>
+    fun getEntertainmentHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String = "entertainment") : Call<NewsApiResponse>
 
     @GET("v2/top-headlines?apiKey=${API_KEY}")
-    fun getSportsHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String) : Call<NewsApiResponse>
+    fun getSportsHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String ="sports") : Call<NewsApiResponse>
 
     @GET("v2/top-headlines?apiKey=${API_KEY}")
-    fun getScienceHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String) : Call<NewsApiResponse>
+    fun getScienceHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String ="science") : Call<NewsApiResponse>
 
 }
 
