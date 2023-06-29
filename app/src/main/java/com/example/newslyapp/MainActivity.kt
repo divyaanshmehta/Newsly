@@ -2,14 +2,9 @@ package com.example.newslyapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.newslyapp.Models.NewsApiResponse
+import androidx.fragment.app.Fragment
 import com.example.newslyapp.databinding.ActivityMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.newslyapp.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,32 +16,52 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getNews()
+        showFragment(HomeFragment())
 
+        val homeFragment = HomeFragment()
+        val businessNewsFragment = BusinessNewsFragment()
+        val scienceNewsFragment = ScienceNewsFragment()
+        val sportsNewsFragment = SportsNewsFragment()
+        val technologyNewsFragment = TechnologyNewsFragment()
+        val healthNewsFragment = HealthNewsFragment()
+        val entertainmentNewsFragment = EntertainmentNewsFragment()
+
+//        supportFragmentManager.beginTransaction()
+//            .add(R.id.container, homeFragment)
+//            .commit()
+
+        binding.btn0.setOnClickListener {
+            showFragment(homeFragment)
+        }
+        binding.btn1.setOnClickListener {
+            showFragment(businessNewsFragment)
+        }
+
+        binding.btn2.setOnClickListener {
+            showFragment(scienceNewsFragment)
+        }
+
+        binding.btn3.setOnClickListener {
+            showFragment(sportsNewsFragment)
+        }
+
+        binding.btn4.setOnClickListener {
+            showFragment(technologyNewsFragment)
+        }
+
+        binding.btn5.setOnClickListener {
+            showFragment(healthNewsFragment)
+        }
+
+        binding.btn6.setOnClickListener {
+            showFragment(entertainmentNewsFragment)
+        }
     }
 
-    private fun getNews() {
-        val news = NewsService.newsInstance.getHeadLines("us",1)
-        news.enqueue(object : Callback<NewsApiResponse> {
-            override fun onResponse(
-                call: Call<NewsApiResponse>,
-                response: Response<NewsApiResponse>
-            ) {
-                val news : NewsApiResponse? = response.body()
-                if (news != null) {
-                    var adapter = NewsAdapter(this@MainActivity, news.articles)
-                    val newsList: RecyclerView = binding.recyclerMain
-                    adapter = NewsAdapter(this@MainActivity, news.articles)
-                    newsList.adapter = adapter
-                    newsList.layoutManager = LinearLayoutManager(this@MainActivity)
-
-                }
-            }
-
-            override fun onFailure(call: Call<NewsApiResponse>, t: Throwable) {
-                Log.d("Error", "Unable to fetch news");
-            }
-
-        })
+    private fun showFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
