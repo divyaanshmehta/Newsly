@@ -1,19 +1,19 @@
-package com.example.newslyapp.fragments
-
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newslyapp.Models.NewsApiResponse
 import com.example.newslyapp.NewsAdapter
 import com.example.newslyapp.NewsService
 import com.example.newslyapp.databinding.FragmentHomeBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -43,25 +43,25 @@ class HomeFragment : Fragment() {
         getNews()
     }
 
+    //This gets invoked when the fragment's view is created
     private fun getNews() {
-        val newsService = NewsService.newsInstance
-        val call = newsService.getHeadLines("us", 1)
-        call.enqueue(object : Callback<NewsApiResponse> {
-            override fun onResponse(
-                call: Call<NewsApiResponse>,
-                response: Response<NewsApiResponse>
-            ) {
-                val newsApiResponse = response.body()
-                if (newsApiResponse != null) {
-                    val adapter = NewsAdapter(requireContext(), newsApiResponse.articles)
-                    binding.recyclerMain.adapter = adapter
-                    binding.recyclerMain.layoutManager = LinearLayoutManager(requireContext())
+        lifecycleScope.launch(Dispatchers.Main) {
+            try {
+                val newsService = NewsService.newsInstance
+                val response = withContext(Dispatchers.IO) {
+                    newsService.getHeadLines("in", 1).execute()
                 }
+                if (response.isSuccessful) {
+                    val newsApiResponse = response.body()
+                    if (newsApiResponse != null) {
+                        adapter.updateArticles(newsApiResponse.articles)
+                    }
+                } else {
+                    Log.d("Error", "Unable to fetch news")
+                }
+            } catch (e: Exception) {
+                Log.d("Error", "Exception occurred: ${e.message}")
             }
-
-            override fun onFailure(call: Call<NewsApiResponse>, t: Throwable) {
-                Log.d("Error", "Unable to fetch news")
-            }
-        })
+        }
     }
 }

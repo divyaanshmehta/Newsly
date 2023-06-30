@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newslyapp.Models.NewsHeadlines
 
-class NewsAdapter(val context: Context, val articles: List<NewsHeadlines>) :
+class NewsAdapter(val context: Context, var articles: List<NewsHeadlines>) :
     RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,5 +37,9 @@ class NewsAdapter(val context: Context, val articles: List<NewsHeadlines>) :
         Glide.with(context).load(article.urlToImage).into(holder.imageHeadlines)
 
 
+    }
+    fun updateArticles(newArticles: List<NewsHeadlines>) {
+        articles = newArticles
+        notifyDataSetChanged()
     }
 }

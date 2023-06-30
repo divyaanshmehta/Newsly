@@ -1,5 +1,6 @@
 package com.example.newslyapp
 
+import HomeFragment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,8 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //If we use this, clicking on the back button takes us to an empty fragment and u have to click twice
-       // showFragment(HomeFragment())
 
         val homeFragment = HomeFragment()
         val businessNewsFragment = BusinessNewsFragment()
