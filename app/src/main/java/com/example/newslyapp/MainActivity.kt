@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         binding.btn0.setOnClickListener {
-
             showFragment(homeFragment)
         }
         binding.btn1.setOnClickListener {

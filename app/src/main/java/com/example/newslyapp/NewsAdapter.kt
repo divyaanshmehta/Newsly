@@ -1,6 +1,7 @@
 package com.example.newslyapp
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,13 @@ class NewsAdapter(val context: Context, var articles: List<NewsHeadlines>) :
         holder.newsTitle.text = article.title
         holder.newsSource.text = article.source.name
         Glide.with(context).load(article.urlToImage).into(holder.imageHeadlines)
+
+        holder.itemView.setOnClickListener {
+            // Open WebView with the corresponding article URL
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("url", article.url)
+            context.startActivity(intent)
+        }
 
 
     }
