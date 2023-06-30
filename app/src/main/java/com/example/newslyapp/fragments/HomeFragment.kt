@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
 
     private fun getNews() {
         val newsService = NewsService.newsInstance
-        val call = newsService.getScienceHeadLines("us", 1)
+        val call = newsService.getHeadLines("us", 1)
         call.enqueue(object : Callback<NewsApiResponse> {
             override fun onResponse(
                 call: Call<NewsApiResponse>,

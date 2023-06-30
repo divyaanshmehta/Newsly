@@ -1,7 +1,9 @@
 package com.example.newslyapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import com.example.newslyapp.databinding.ActivityMainBinding
 import com.example.newslyapp.fragments.*
@@ -15,8 +17,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        showFragment(HomeFragment())
+        //If we use this, clicking on the back button takes us to an empty fragment and u have to click twice
+       // showFragment(HomeFragment())
 
         val homeFragment = HomeFragment()
         val businessNewsFragment = BusinessNewsFragment()
@@ -26,11 +28,12 @@ class MainActivity : AppCompatActivity() {
         val healthNewsFragment = HealthNewsFragment()
         val entertainmentNewsFragment = EntertainmentNewsFragment()
 
-//        supportFragmentManager.beginTransaction()
-//            .add(R.id.container, homeFragment)
-//            .commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, homeFragment)
+            .commit()
 
         binding.btn0.setOnClickListener {
+
             showFragment(homeFragment)
         }
         binding.btn1.setOnClickListener {
@@ -57,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             showFragment(entertainmentNewsFragment)
         }
     }
+
 
     private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
