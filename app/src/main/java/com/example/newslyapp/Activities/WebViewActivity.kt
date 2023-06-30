@@ -1,4 +1,4 @@
-package com.example.newslyapp
+package com.example.newslyapp.Activities
 
 import android.os.Bundle
 import android.webkit.WebView

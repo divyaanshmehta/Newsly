@@ -57,4 +57,10 @@ dependencies {
     // Lifecycle dependencies
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
 
+
+    //Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.0"
+
+
 }

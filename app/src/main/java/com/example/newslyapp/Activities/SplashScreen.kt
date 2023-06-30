@@ -1,9 +1,11 @@
-package com.example.newslyapp
+package com.example.newslyapp.Activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.example.newslyapp.MainActivity
+import com.example.newslyapp.R
 
 class SplashScreen : AppCompatActivity() {
     private val SPLASH_DELAY: Long = 2000 // 2 seconds

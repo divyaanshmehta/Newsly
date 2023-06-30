@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.newslyapp.Activities.WebViewActivity
 import com.example.newslyapp.Models.NewsHeadlines
 
 class NewsAdapter(val context: Context, var articles: List<NewsHeadlines>) :

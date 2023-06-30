@@ -1,17 +1,18 @@
 package com.example.newslyapp
 
 import HomeFragment
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.newslyapp.databinding.ActivityMainBinding
-import com.example.newslyapp.fragments.*
+import com.example.newslyapp.Fragments.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,51 +20,38 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val homeFragment = HomeFragment()
-        val businessNewsFragment = BusinessNewsFragment()
-        val scienceNewsFragment = ScienceNewsFragment()
-        val sportsNewsFragment = SportsNewsFragment()
-        val technologyNewsFragment = TechnologyNewsFragment()
-        val healthNewsFragment = HealthNewsFragment()
-        val entertainmentNewsFragment = EntertainmentNewsFragment()
+        // Get the NavHostFragment using the ID specified in the XML layout
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.container, homeFragment)
-            .commit()
+        // Get the NavController from the NavHostFragment
+        navController = navHostFragment.navController
 
         binding.btn0.setOnClickListener {
-            showFragment(homeFragment)
+            navController.navigate(R.id.homeFragment)
         }
+
         binding.btn1.setOnClickListener {
-            showFragment(businessNewsFragment)
+            navController.navigate(R.id.businessNewsFragment)
         }
 
         binding.btn2.setOnClickListener {
-            showFragment(scienceNewsFragment)
+            navController.navigate(R.id.scienceNewsFragment)
         }
 
         binding.btn3.setOnClickListener {
-            showFragment(sportsNewsFragment)
+            navController.navigate(R.id.sportsNewsFragment)
         }
 
         binding.btn4.setOnClickListener {
-            showFragment(technologyNewsFragment)
+            navController.navigate(R.id.technologyNewsFragment)
         }
 
         binding.btn5.setOnClickListener {
-            showFragment(healthNewsFragment)
+            navController.navigate(R.id.healthNewsFragment)
         }
 
         binding.btn6.setOnClickListener {
-            showFragment(entertainmentNewsFragment)
+            navController.navigate(R.id.entertainmentNewsFragment)
         }
-    }
-
-
-    private fun showFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .addToBackStack(null)
-            .commit()
     }
 }

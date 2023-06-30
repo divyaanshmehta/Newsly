@@ -1,4 +1,4 @@
-package com.example.newslyapp.fragments
+package com.example.newslyapp.Fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -8,18 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newslyapp.Models.NewsApiResponse
 import com.example.newslyapp.NewsAdapter
 import com.example.newslyapp.NewsService
 import com.example.newslyapp.databinding.FragmentScienceNewsBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class TechnologyNewsFragment : Fragment() {
+class SportsNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentScienceNewsBinding
     private lateinit var adapter: NewsAdapter
@@ -52,7 +48,7 @@ class TechnologyNewsFragment : Fragment() {
             try {
                 val newsService = NewsService.newsInstance
                 val response = withContext(Dispatchers.IO) {
-                    newsService.getTechHeadLines("in", 1,).execute()
+                    newsService.getSportsHeadLines("in", 1,).execute()
                 }
                 if (response.isSuccessful) {
                     val newsApiResponse = response.body()
