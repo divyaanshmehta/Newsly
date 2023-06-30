@@ -3,6 +3,7 @@ package com.example.newslyapp
 import HomeFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -53,5 +54,14 @@ class MainActivity : AppCompatActivity() {
         binding.btn6.setOnClickListener {
             navController.navigate(R.id.entertainmentNewsFragment)
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Close the app
+                finish()
+            }
+        })
     }
+
+
 }

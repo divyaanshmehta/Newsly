@@ -16,6 +16,9 @@ class WebViewActivity : AppCompatActivity() {
         binding = ActivityWebviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        //TODO() : Add a progress bar to show before the page has loaded
+
         webView = binding.webView
         webView.webViewClient = WebViewClient()
 
