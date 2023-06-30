@@ -30,6 +30,9 @@ interface NewsInterface {
     @GET("v2/top-headlines?apiKey=${API_KEY}")
     fun getScienceHeadLines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String ="science") : Call<NewsApiResponse>
 
+
+    @GET("v2/top-headlines?apiKey=${API_KEY}")
+    fun getHealthHeadlines(@Query("country")country: String, @Query("page")page : Int, @Query("category")category : String ="health") : Call<NewsApiResponse>
 }
 
 object NewsService{

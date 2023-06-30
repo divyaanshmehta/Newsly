@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- nav_graph.xml -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="HomeFragment"
+        android:label="Home"
+        />
+
+    <fragment
+        android:id="@+id/businessNewsFragment"
+        android:name="com.example.newslyapp.Fragments.BusinessNewsFragment"
+        android:label="BusinessNews"
+        />
+    <fragment
+        android:id="@+id/technologyNewsFragment"
+        android:name="com.example.newslyapp.Fragments.TechnologyNewsFragment"
+        android:label="TechnologyNews"
+        />
+    <fragment
+        android:id="@+id/scienceNewsFragment"
+        android:name="com.example.newslyapp.Fragments.ScienceNewsFragment"
+        android:label="ScienceNews"
+        />
+    <fragment
+        android:id="@+id/healthNewsFragment"
+        android:name="com.example.newslyapp.Fragments.HealthNewsFragment"
+        android:label="HealthNews"
+        />
+    <fragment
+        android:id="@+id/sportsNewsFragment"
+        android:name="com.example.newslyapp.Fragments.SportsNewsFragment"
+        android:label="SportsNews"
+        />
+    <fragment
+        android:id="@+id/entertainmentNewsFragment"
+        android:name="com.example.newslyapp.Fragments.EntertainmentNewsFragment"
+        android:label="EntertainmentNews"
+        />
+
+
+
+
+    <!-- Add more fragments or other navigation components here -->
+
+</navigation>

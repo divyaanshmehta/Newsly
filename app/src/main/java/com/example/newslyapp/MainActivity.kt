@@ -1,19 +1,19 @@
 package com.example.newslyapp
 
+import HomeFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.newslyapp.Models.NewsApiResponse
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.newslyapp.databinding.ActivityMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.newslyapp.Fragments.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,32 +21,47 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getNews()
+        // Get the NavHostFragment using the ID specified in the XML layout
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
-    }
+        // Get the NavController from the NavHostFragment
+        navController = navHostFragment.navController
 
-    private fun getNews() {
-        val news = NewsService.newsInstance.getHeadLines("us",1)
-        news.enqueue(object : Callback<NewsApiResponse> {
-            override fun onResponse(
-                call: Call<NewsApiResponse>,
-                response: Response<NewsApiResponse>
-            ) {
-                val news : NewsApiResponse? = response.body()
-                if (news != null) {
-                    var adapter = NewsAdapter(this@MainActivity, news.articles)
-                    val newsList: RecyclerView = binding.recyclerMain
-                    adapter = NewsAdapter(this@MainActivity, news.articles)
-                    newsList.adapter = adapter
-                    newsList.layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.btn0.setOnClickListener {
+            navController.navigate(R.id.homeFragment)
+        }
 
-                }
+        binding.btn1.setOnClickListener {
+            navController.navigate(R.id.businessNewsFragment)
+        }
+
+        binding.btn2.setOnClickListener {
+            navController.navigate(R.id.scienceNewsFragment)
+        }
+
+        binding.btn3.setOnClickListener {
+            navController.navigate(R.id.sportsNewsFragment)
+        }
+
+        binding.btn4.setOnClickListener {
+            navController.navigate(R.id.technologyNewsFragment)
+        }
+
+        binding.btn5.setOnClickListener {
+            navController.navigate(R.id.healthNewsFragment)
+        }
+
+        binding.btn6.setOnClickListener {
+            navController.navigate(R.id.entertainmentNewsFragment)
+        }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Close the app
+                finish()
             }
-
-            override fun onFailure(call: Call<NewsApiResponse>, t: Throwable) {
-                Log.d("Error", "Unable to fetch news");
-            }
-
         })
     }
+
+
 }
